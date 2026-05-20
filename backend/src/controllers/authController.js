@@ -28,7 +28,7 @@ class AuthController {
 
       const passwordMatch = await bcrypt.compare(
         password,
-        user.password
+        user.passwordHash
       )
 
       if (!passwordMatch) {

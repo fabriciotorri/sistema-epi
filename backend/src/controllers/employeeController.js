@@ -1,19 +1,12 @@
+const prisma = require('../prisma/client')
+
 class EmployeeController {
 
   async list(req, res) {
 
-    return res.json([
-      {
-        id: 1,
-        nome: 'João Silva',
-        cargo: 'Soldador'
-      },
-      {
-        id: 2,
-        nome: 'Maria Souza',
-        cargo: 'Eletricista'
-      }
-    ])
+    const employees = await prisma.employee.findMany()
+
+    return res.json(employees)
 
   }
 
@@ -25,13 +18,19 @@ class EmployeeController {
       cargo
     } = req.body
 
-    return res.status(201).json({
-      message: 'Funcionário cadastrado',
-      funcionario: {
+    const employee = await prisma.employee.create({
+
+      data: {
         nome,
         cpf,
         cargo
       }
+
+    })
+
+    return res.status(201).json({
+      message: 'Funcionário cadastrado',
+      employee
     })
 
   }

@@ -6,6 +6,8 @@ const cors = require('cors')
 const employeeRoutes = require('./routes/employeeRoutes')
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
+const epiRoutes = require('./routes/epiRoutes')
+const deliveryRoutes = require('./routes/deliveryRoutes')
 
 const app = express()
 
@@ -25,6 +27,8 @@ app.use('/employees', employeeRoutes)
 app.use('/users', userRoutes)
 
 app.use(authRoutes)
+app.use('/epis', epiRoutes)
+app.use('/deliveries', deliveryRoutes)
 
 const PORT = process.env.PORT || 3000
 
